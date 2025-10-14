@@ -114,32 +114,40 @@ export default function Home() {
       </div>
 
       {/* Movies Grid */}
-      {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 px-4 sm:px-6">
-          {Array.from({length:12}).map((_,i)=>(
-            <div key={i} className="animate-pulse bg-white/10 h-[250px] sm:h-[300px] rounded-xl backdrop-blur-md"></div>
-          ))}
+     {/* Movies Grid */}
+{loading ? (
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 px-4 sm:px-6">
+    {Array.from({ length: 12 }).map((_, i) => (
+      <div key={i} className="animate-pulse bg-white/10 h-[250px] sm:h-[300px] rounded-xl backdrop-blur-md"></div>
+    ))}
+  </div>
+) : movies.length > 0 ? (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 px-4 sm:px-6 mb-6">
+    {movies.map((m) => (
+      <div
+        key={m.id}
+        className="relative cursor-pointer rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg hover:scale-105 transform transition shadow-lg hover:shadow-2xl"
+        onClick={() => openMovie(m.id)}
+      >
+        <img
+          src={m.poster_path ? IMAGE_BASE + m.poster_path : `https://via.placeholder.com/500x750?text=${encodeURIComponent(m.title)}`}
+          alt={m.title}
+          className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[300px] object-cover rounded-2xl"
+        />
+        <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent text-white font-semibold text-center text-sm sm:text-base">
+          {m.title}
         </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 px-4 sm:px-6 mb-6">
-          {movies.map(m => (
-            <div
-              key={m.id}
-              className="relative cursor-pointer rounded-2xl overflow-hidden bg-white/10 backdrop-blur-lg hover:scale-105 transform transition shadow-lg hover:shadow-2xl"
-              onClick={() => openMovie(m.id)}
-            >
-              <img
-                src={m.poster_path ? IMAGE_BASE + m.poster_path : `https://via.placeholder.com/500x750?text=${encodeURIComponent(m.title)}`}
-                alt={m.title}
-                className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[300px] object-cover rounded-2xl"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 bg-gradient-to-t from-black/70 to-transparent text-white font-semibold text-center text-sm sm:text-base">
-                {m.title}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      </div>
+    ))}
+  </div>
+) : (
+  <div className="flex justify-center items-center h-[300px] text-center px-4">
+    <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-400">
+      😔 No movies found! Try a different search or category.
+    </p>
+  </div>
+)}
+
 
       {/* Modal */}
       {selected && (
