@@ -43,6 +43,8 @@ export default function Footer({ darkMode, onSearchCategory }) {
                             <h2 className="font-semibold mb-2 mt-4 tracking-wide">Other team members</h2>
                             <li  className="hover:text-purple-400 transition">Piyush Kumar</li>
                             <li  className="hover:text-purple-400 transition">Piyush Shakya</li>
+                            <li  className="hover:text-purple-400 transition">Pawan Kushwaha</li>
+                            <li  className="hover:text-purple-400 transition">Mohit Kumar</li>
                         </ul>
                     </div>
                 </div>
